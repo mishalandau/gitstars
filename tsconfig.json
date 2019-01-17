@@ -10,6 +10,11 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
+    "paths": {
+      "~/*": [ "/*"],
+      "@/*": ["./src/*"]
+    },
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -20,6 +25,7 @@
     "noUnusedLocals": true
   },
   "exclude": [
+    "config",
     "node_modules",
     "build",
     "scripts",
