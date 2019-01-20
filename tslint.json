@@ -5,7 +5,9 @@
     "semicolon": false,
     "trailing-comma": false,
     "member-access": [true, "no-public"],
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "no-namespace": false,
+    "no-unused-expression": false
   },
   "linterOptions": {
     "exclude": [

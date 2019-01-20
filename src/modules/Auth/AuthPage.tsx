@@ -1,11 +1,13 @@
 import * as React from 'react';
-import './styles/auth-page.scss';
+import AuthFormContainer from './AuthFormContainer';
+import styles from './styles/auth-page.scoped.scss';
 
 export default class AuthPage extends React.Component {
 	render() {
 		return (
-			<div className="auth-page">
-				<span>text</span>
+			<div className={styles['auth-page']}>
+				<AuthFormContainer />
+				{/* <DisplayError /> */}
 			</div>
 		);
 	}
