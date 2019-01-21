@@ -2,6 +2,7 @@
 import ErrorContext from '@/contexts/ErrorContext';
 import User from '@/modules/CurrentUser/User';
 import ButtonDefault from '@/sharedComponents/ButtonDefault';
+import LogoInfo from '@/sharedComponents/LogoInfo';
 import MarginView from '@/sharedComponents/MarginView';
 import TextFieldDefault from '@/sharedComponents/TextFieldDefault';
 import { boundMethod } from 'autobind-decorator';
@@ -9,7 +10,6 @@ import { boundMethod } from 'autobind-decorator';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import UserApi from './AuthService';
-import LogoInfo from './components/LogoInfo';
 
 interface AuthFormContainerState {
 	username: string;
@@ -67,7 +67,8 @@ class AuthFormContainer extends React.Component<AnythingProps, AuthFormContainer
 					label='Enter github username' />
 				<MarginView top={20} />
 				<ButtonDefault
-                    onClick={this.login}
+					onClick={this.login}
+					type='active'
                     title='Enter' />
 			</div>
 		);

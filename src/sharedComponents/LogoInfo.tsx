@@ -17,11 +17,20 @@ const LogoWrapper = styled.div`
     max-height: 120px;
 `;
 
+interface LogoInfoProps {
+    zoom: number;
+}
 
-export default class LogoInfo extends React.Component {
+export default class LogoInfo extends React.Component<LogoInfoProps> {
+    static defaultProps: LogoInfoProps = {
+        zoom: 1
+    }
+
     render() {
         return(
-            <Container>
+            <Container style={{
+                zoom: this.props.zoom
+            }}>
                 <LogoWrapper>
                     <LogoIcon
                         width="100%"
