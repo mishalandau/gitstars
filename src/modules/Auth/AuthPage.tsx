@@ -7,7 +7,6 @@ export default class AuthPage extends React.Component {
 		return (
 			<div className={styles['auth-page']}>
 				<AuthFormContainer />
-				{/* <DisplayError /> */}
 			</div>
 		);
 	}

@@ -3,6 +3,7 @@ import client from '@/config/Apollo';
 import BaseTemplate from '@/layouts/default';
 import AuthPage from '@/modules/Auth/AuthPage';
 import CatalogPage from '@/modules/Catalog/CatalogPage';
+import userStore from '@/modules/CurrentUser/UserStore';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { Provider } from 'mobx-react';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
@@ -14,8 +15,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
+
 const stores = {
 	routing: routingStore,
+	userStore
 };
 
 const history = syncHistoryWithStore(browserHistory, routingStore);

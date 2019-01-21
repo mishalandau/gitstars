@@ -1,7 +1,9 @@
+import LogoutContainer from '@/modules/Auth/LogoutContainer';
 import ButtonDefault from '@/sharedComponents/ButtonDefault';
 import LogoInfo from '@/sharedComponents/LogoInfo';
 import * as React from 'react';
 import styled from 'styled-components';
+import RepoContainer from '../Repo/RepoContainer';
 import styles from './styles/catalog-page.scoped.scss';
 
 
@@ -23,14 +25,17 @@ export default class CatalogPage extends React.Component {
 						<ButtonDefault
 							onClick={this.goCatalog}
 							title='Catalog'
-							type='default' />
+							type='active' />
 							<ButtonDefault
 								onClick={this.goCatalog}
 								title='Favourites'
-								type='active' />
+								type='default' />
 					</ButtonActions>
-					<LogoInfo zoom={0.5} />
+					<LogoutContainer />
 				</header>
+				<div className='content'>
+					<RepoContainer />
+				</div>
 			</div>
 		);
 	}

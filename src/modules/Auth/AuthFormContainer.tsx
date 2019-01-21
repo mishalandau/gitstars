@@ -1,12 +1,11 @@
-// import client from '@/config/Apollo';
 import ErrorContext from '@/contexts/ErrorContext';
-import User from '@/modules/CurrentUser/User';
+import { UserStore } from '@/modules/CurrentUser/UserStore';
 import ButtonDefault from '@/sharedComponents/ButtonDefault';
 import LogoInfo from '@/sharedComponents/LogoInfo';
 import MarginView from '@/sharedComponents/MarginView';
 import TextFieldDefault from '@/sharedComponents/TextFieldDefault';
 import { boundMethod } from 'autobind-decorator';
-// import gql from 'graphql-tag';
+import { inject, observer } from 'mobx-react'
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import UserApi from './AuthService';
@@ -16,10 +15,14 @@ interface AuthFormContainerState {
 }
 
 interface AnythingProps extends Partial<RouteComponentProps> {
+	userStore?: UserStore
 }
 @(withRouter as any)
+@inject('userStore')
+@observer
 class AuthFormContainer extends React.Component<AnythingProps, AuthFormContainerState> {
 	static contextType = ErrorContext;
+
 	state = {
 		username: ''
 	}
@@ -31,34 +34,25 @@ class AuthFormContainer extends React.Component<AnythingProps, AuthFormContainer
 		});
 	}
 
+
+	get userStore() {
+		return this.props.userStore!
+	}
+
 	@boundMethod
 	async login() {
 		UserApi.fetchUser(this.state.username).then((user) => {
-			User.userInfo = user;
+			this.userStore.setUser(user);
 			this.props.history && this.props.history.push('/catalog');
 		}).catch((err: TypeError) => {
 			this.context.onChangeValue(err.message);
 		})
-		// client.query({
-		// 	query: gql`
-		// 		{
-		// 			search (query: ${this.state.username}, type: USER, first: 1){
-		// 				edges {
-		// 					node {
-		// 						... on User {
-		// 							login
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 	`
-		// });
 	}
 
 	render() {
 		return (
 			<div>
+				<span>{this.userStore.user && this.userStore.user.login}</span>
 				<LogoInfo />
 				<MarginView top={40} />
 				<TextFieldDefault
@@ -69,13 +63,11 @@ class AuthFormContainer extends React.Component<AnythingProps, AuthFormContainer
 				<ButtonDefault
 					onClick={this.login}
 					type='active'
-                    title='Enter' />
+					title='Enter' />
 			</div>
 		);
 	}
 }
 
 // https://github.com/facebook/react/issues/14061
-AuthFormContainer.contextType = ErrorContext;
-
 export default Object.assign(AuthFormContainer, { contextType: undefined });
